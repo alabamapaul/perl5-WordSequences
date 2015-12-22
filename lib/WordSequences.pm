@@ -79,10 +79,10 @@ has seq_length => (
 ## "Private" attributes
 ##****************************************************************************
 ## Hash reference of all sequences
-has _sequences => (is => qq{rwp},);
+has _sequences => (is => qq{rw},);
 
 ## A list of all words
-has _words => (is => qq{rwp},);
+has _words => (is => qq{rw},);
 
 ##****************************************************************************
 ## Object Methods
@@ -108,7 +108,10 @@ sub BUILD
   my $self = shift;
 
   ## Create an empty list of words
-  $self->_set_words([]);
+  $self->_words([]);
+  
+  ## Create an empty hash for sequences
+  $self->_sequences({});
 
   return ($self);
 }
@@ -169,9 +172,7 @@ sub add_sequence
   }
 
   ## See if sequence exists
-  if (
-    my $seq = $self->_sequences->{$sequence};
-    )
+  if (my $seq = $self->_sequences->{$sequence})
   {
     ## Add the word to the sequence
     $seq->add_word($word);
