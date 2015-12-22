@@ -42,6 +42,7 @@ use Moo;
 use Readonly;
 use Carp qw(confess cluck);
 use WordSequence;
+use Scalar::Util qw(openhandle);
 
 ## Version string
 our $VERSION = qq{0.01};
@@ -270,7 +271,7 @@ from.
 
 =item B<Return>
 
-WordSequence object
+The number of words processed
 
 =back
 
@@ -282,8 +283,43 @@ sub words_from_file
   my $self  = shift;
   my $param = shift;
 
-  confess(qq{TODO: Implement words_from_file() method});
+  ## Validate parameters
+  confess(qq{qq{Missing required arguments: file}}) unless (defined($param));
+  
+  my $fh;         ## Filehandle
+  my $close_fh;   ## Flag indicating if we need to call close()
+  my $count = 0;  ## Number of words processed
+  
+  ## See if we received a filehandle
+  if (openhandle($param))
+  {
+    ## Received an open filehandle
+    $fh = $param;
+  }
+  else
+  {
+    ## Assume we received a filename
+    confess(qq{Could not open file "$param"}) unless (open($fh, qq{<}, $param));
+    ## Set flag to close file
+    $close_fh = 1;
+  }
+  
+  ## Read the file
+  while (my $line = <$fh>)
+  {
+    foreach my $word (split(/\s+/, $line))
+    {
+      $word = _trim($word);
+      next unless($word);
+      $count++;
+##      warn(sprintf(qq{%02d: "$word"\n}, $count));
+      $self->add_word($word);
+    }
+  }
+  close($fh) if ($close_fh);
 
+  ## Return number of words processed
+  return($count);
 }
 
 ##****************************************************************************
