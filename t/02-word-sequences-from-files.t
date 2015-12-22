@@ -54,10 +54,3 @@ foreach my $test (@ADD_WORD_DATA)
 
 done_testing();
 __END__
-
-__DATA__
-supple
-supplant
-plant
-planted
-plants
