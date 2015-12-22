@@ -192,6 +192,63 @@ sub add_sequence
 ##****************************************************************************
 ##****************************************************************************
 
+=head2 add_word($word)
+
+=over 2
+
+=item B<Description>
+
+Add all possible sequences from the given word
+
+=item B<Parameters>
+
+=over 4
+
+=item $word
+
+Word to be processed
+
+=back
+
+=item B<Return>
+
+A count of the number of sequences extracted from the word
+
+=back
+
+=cut
+
+##----------------------------------------------------------------------------
+sub add_word
+{
+  my $self = shift;
+  my $word = shift;
+  
+  ## Validate parameters
+  confess(qq{Missing required arguments: word}) unless (defined($word));
+  
+  ## Trim whitespace
+  $word = _trim(lc($word));
+  
+  ## Skip words that are shorter than the sequence length
+  return(0) if (length($word) < $self->seq_length);
+  
+  ## Determine number of sequences
+  my $count = length($word) - $self->seq_length + 1;
+  
+  ## Extract all sequences
+  for (my $start = 0; $start < $count; $start++)
+  {
+    $self->add_sequence(substr($word, $start, $self->seq_length), $word);
+  }
+
+  ## Return the number of sequences extracted
+  return($count);
+}
+
+##****************************************************************************
+##****************************************************************************
+
 =head2 words_from_file($param)
 
 =over 2
