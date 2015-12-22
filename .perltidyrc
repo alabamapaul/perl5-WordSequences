@@ -1,0 +1,14 @@
+##----------------------------------------------------------------------------
+##        File: .perltidyrc
+## Description: PerlTidy configuration file
+##----------------------------------------------------------------------------
+-b      ## Rename original .bak and update in place
+-l=80   ## Line length 80
+-i=2    ## Indent is 2 spaces
+-ci=2   ## Continuation indent is 2 spaces
+-bl     ## Opening brace left
+-sbl    ## Opening sub brace left
+-pt=2   ## Parenthesis tightness
+-sbt=2  ## Square bracket tightness
+-bt=2   ## Brace tightness (curly brace)
+-nsfs   ## No space before for loop semicolon

@@ -1,0 +1,34 @@
+##----------------------------------------------------------------------------
+##        File: .perlcriticrc
+## Description: Perl Critic configuration file
+##----------------------------------------------------------------------------
+
+##------------------------------------
+## Globals
+##------------------------------------
+## Default severity is 3 - harsh
+severity = 3
+
+## Set format of output
+##    %c  Column number where the violation occurred
+##    %d  Full diagnostic discussion of the violation (DESCRIPTION in POD)
+##    %e  Explanation of violation or page numbers in PBP
+##    %F  Just the name of the logical file where the violation occurred.
+##    %f  Path to the logical file where the violation occurred.
+##    %G  Just the name of the physical file where the violation occurred.
+##    %g  Path to the physical file where the violation occurred.
+##    %l  Logical line number where the violation occurred
+##    %L  Physical line number where the violation occurred
+##    %m  Brief description of the violation
+##    %P  Full name of the Policy module that created the violation
+##    %p  Name of the Policy without the Perl::Critic::Policy:: prefix
+##    %r  The string of source code that caused the violation
+##    %C  The class of the PPI::Element that caused the violation
+##    %s  The severity level of the violation
+verbose = "%m at %f line %l, [%p] %e \n"
+
+##------------------------------------
+## Disable certain policies
+##------------------------------------
+# Close filehandles as soon as possible after opening them.
+[-InputOutput::RequireBriefOpen]
