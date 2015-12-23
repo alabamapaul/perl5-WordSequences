@@ -204,7 +204,7 @@ sub words
 {
   my $self = shift;
   
-  return([keys(%{$self->_words})]);
+  return([sort(keys(%{$self->_words}))]);
 }
 
 ##****************************************************************************

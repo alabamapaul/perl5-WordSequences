@@ -10,7 +10,7 @@ use Readonly;
 Readonly::Scalar my $TEST_SEQ_LENGTH      => 4;
 Readonly::Scalar my $TEST_DATA_WORD_COUNT => 4;
 Readonly::Scalar my $ALL_SEQUENCES        => {
-  arro => qq{carrots},
+  arro => qq{arrows},
   carr => qq{carrots},
   give => qq{give},
   rots => qq{carrots},
