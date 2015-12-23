@@ -307,7 +307,7 @@ sub words_from_file
   ## Read the file
   while (my $line = <$fh>)
   {
-    foreach my $word (split(/\s+/, $line))
+    foreach my $word (split(/\s+/x, $line))
     {
       $word = _trim($word);
       next unless($word);
@@ -363,6 +363,49 @@ sub unique_sequences
   return($list);
   
 }
+
+##****************************************************************************
+##****************************************************************************
+
+=head2 all_sequences()
+
+=over 2
+
+=item B<Description>
+
+Return a reference to an array of all sequences as L<WordSequence> objects
+
+=item B<Parameters>
+
+=over 4
+
+=item NONE
+
+=back
+
+=item B<Return>
+
+ARRAY refence of WordSequence objects
+
+=back
+
+=cut
+
+##----------------------------------------------------------------------------
+sub all_sequences
+{
+  my $self = shift;
+  my $list = [];
+
+  foreach my $seq (sort(keys(%{$self->_sequences})))
+  {
+    push(@{$list}, $self->_sequences->{$seq}); 
+  }
+  
+  return($list);
+  
+}
+
 
 ##----------------------------------------------------------------------------
 ##     @fn _trim($string)
