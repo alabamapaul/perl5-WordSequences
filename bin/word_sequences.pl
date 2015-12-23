@@ -48,6 +48,7 @@ Readonly::Scalar my $COMMAND_LINE_OPTIONS => [
   qq{sequences=s},
   qq{input=s},
   qq{length=i},
+  qq{unique!},
   qq{help},
   qq{man},
   qq{version},
@@ -58,6 +59,7 @@ Readonly::Scalar my $COMMAND_LINE_OPTIONS => [
 my $gOptions = {
   words     => qq{words},
   sequences => qq{sequences},
+  unique    => 1,
   length    => 4,
 };
 
@@ -225,7 +227,9 @@ foreach my $which (qw(words sequences))
   }
 }
 
-foreach my $seq (@{$seqs->unique_sequences})
+## Determine sequences to output
+my $sequences = ($gOptions->{unique} ? $seqs->unique_sequences : $seqs->all_sequences);
+foreach my $seq (@{$sequences})
 {
   print {$fh->{words}} ($seq->words->[0], qq{\n});
   print {$fh->{sequences}} ($seq->sequence, qq{\n});
@@ -254,6 +258,7 @@ file.
 =head1 SYNOPSIS
 
 B<word_sequences.pl> 
+{B<--unique> | B<--no-unique>}
 {B<--length> I<SequenceLength>}
 {B<--input> I<InputFilename>}
 {B<--words> I<WordsFilename>}
@@ -263,6 +268,13 @@ B<word_sequences.pl>
 =head1 OPTIONS
 
 =over 4
+
+=item B<--unique> | B<--no-unique>
+
+Specify if only unique sequences (--unique) or all sequences (--no-unique) 
+should be written to the "words" and "sequences" output files.
+
+DEFAULT: --unique
 
 =item B<--length> I<SequenceLength>
 
@@ -277,13 +289,15 @@ STDIN
 
 =item B<--words> I<WordsFilename>
 
-Specify the filename to use for the "words" output file
+Specify the filename to use for the "words" output file. Each line in the words
+file corresponds with the same line number in the sequences file.
 
 DEFAULT: --words "words"
 
 =item B<--sequences> I<SequencesFilename>
 
-Specify the filename to use for the "sequences" output file
+Specify the filename to use for the "sequences" output file. Each line in the
+sequences file corresponds with the same line number in the words file.
 
 DEFAULT: --sequences "sequences"
 
@@ -303,7 +317,7 @@ Display more detailed help.
 
 =head1 DESCRIPTION
 
-TODO
+word_sequences.pl generates a list of sequences of the specified length.
 
 =cut
 
