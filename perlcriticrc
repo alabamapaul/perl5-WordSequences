@@ -1,0 +1,16 @@
+##----------------------------------------------------------------------------
+##        File: perlcriticrc
+## Description: Perl Critic configuration file
+##----------------------------------------------------------------------------
+
+##------------------------------------
+## Globals
+##------------------------------------
+## Default severity is 3 - harsh
+severity = 3
+
+##------------------------------------
+## Disable certain policies
+##------------------------------------
+# Close filehandles as soon as possible after opening them.
+[-InputOutput::RequireBriefOpen]
