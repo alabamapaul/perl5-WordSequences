@@ -312,7 +312,6 @@ sub words_from_file
       $word = _trim($word);
       next unless($word);
       $count++;
-##      warn(sprintf(qq{%02d: "$word"\n}, $count));
       $self->add_word($word);
     }
   }
@@ -352,11 +351,17 @@ ARRAY refence of WordSequence objects
 ##----------------------------------------------------------------------------
 sub unique_sequences
 {
-  my $self  = shift;
-  my $param = shift;
+  my $self = shift;
+  my $list = [];
 
-  confess(qq{TODO: Implement unique_sequences() method});
-
+  foreach my $seq (sort(keys(%{$self->_sequences})))
+  {
+    my $obj = $self->_sequences->{$seq};
+    push(@{$list}, $obj) if ($obj->is_unique); 
+  }
+  
+  return($list);
+  
 }
 
 ##----------------------------------------------------------------------------
