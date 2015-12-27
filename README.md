@@ -2,7 +2,7 @@
 ## Overview
 
 WordsSequences is an object oriented module for parsing a file into arbitrary
-length sequences.
+length sequences of letters.
 
 ## Installation
 It is recommendded to use the cpanm utility (see [App::cpanm](https://metacpan.org/pod/App::cpanminus)) to ensure any required modules are installed if needed.  
