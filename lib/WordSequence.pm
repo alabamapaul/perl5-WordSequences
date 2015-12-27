@@ -13,7 +13,7 @@ WordSequence - Object for recording words with an arbitrary sequence length
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =head1 SYNOPSIS
 
@@ -34,7 +34,7 @@ use Readonly;
 use Carp qw(confess);
 
 ## Version string
-our $VERSION = qq{0.01};
+our $VERSION = qq{0.02};
 
 ##****************************************************************************
 ## Object attribute
@@ -72,7 +72,7 @@ has sequence => (
 
 Number of words added to the sequence.
 
-B<NOTE:> The number of count may not equal the number of words returned by
+B<NOTE:> The value of count may not equal the number of words returned by
 the words() method as count is incremented when duplicate words are added.
 
 
@@ -181,7 +181,7 @@ sub add_word
 
 =item B<Description>
 
-Return a reference to an array of words for this sequence
+Return a reference to an array of words in ascending order for this sequence
 
 =item B<Parameters>
 
@@ -193,7 +193,8 @@ Return a reference to an array of words for this sequence
 
 =item B<Return>
 
-ARRAY refence of SCALARS containing the words for this sequence
+ARRAY refence of SCALARS containing the words in ascending order for 
+this sequence
 
 =back
 
