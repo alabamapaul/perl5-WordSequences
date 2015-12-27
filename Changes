@@ -1,4 +1,6 @@
 {{$NEXT}}
-
+        * In the words_sequences.pl script, if --no-unique is specified then
+          all words are output not just the first word.
+          
 0.01    2015-12-22
         * Initial release
