@@ -14,7 +14,7 @@ arbitrary length sequences
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =head1 SYNOPSIS
 
@@ -45,7 +45,7 @@ use WordSequence;
 use Scalar::Util qw(openhandle);
 
 ## Version string
-our $VERSION = qq{0.02};
+our $VERSION = qq{0.03};
 
 ##****************************************************************************
 ## Object attribute
@@ -62,7 +62,7 @@ our $VERSION = qq{0.02};
 
 =over 2
 
-Length of the character sequence
+Length of the letter sequence
 
 DEFAULT: 4
 
@@ -237,14 +237,23 @@ sub add_word
   ## Determine number of sequences
   my $count = length($word) - $self->seq_length + 1;
   
+  ## Number of sequences added
+  my $added = 0;
+  
   ## Extract all sequences
   for (my $start = 0; $start < $count; $start++)
   {
-    $self->add_sequence(substr($word, $start, $self->seq_length), $word);
+    my $seq = substr($word, $start, $self->seq_length);
+    ## Skip any sequence that has any thing that is not a letter a-z 
+    next if ($seq =~ /[^a-z]+/x);
+    ## Increment the count
+    $added++;   
+    ## Add the sequence
+    $self->add_sequence($seq, $word);
   }
 
   ## Return the number of sequences extracted
-  return($count);
+  return($added);
 }
 
 ##****************************************************************************
