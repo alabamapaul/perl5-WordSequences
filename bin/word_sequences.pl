@@ -30,7 +30,7 @@ use WordSequences;
 ##--------------------------------------------------------
 ## Symbolic Constants
 ##--------------------------------------------------------
-Readonly::Scalar our $VERSION => qq{0.01};
+Readonly::Scalar our $VERSION => qq{0.02};
 
 ##--------------------------------------------------------
 ## A list of all command line options
@@ -208,12 +208,15 @@ print(qq{#} x 70, qq{\n});
 ## Create the WordSequence object
 my $seqs = WordSequences->new(seq_length => $gOptions->{length});
 
+## Determine where to read input
 if ($gOptions->{input})
 {
+  ## Filename was specified
   $seqs->words_from_file($gOptions->{input});
 }
 else
 {
+  ## No --input option, so use STDIN
   $seqs->words_from_file(*STDIN);
 }
 
@@ -231,7 +234,7 @@ foreach my $which (qw(words sequences))
 my $sequences = ($gOptions->{unique} ? $seqs->unique_sequences : $seqs->all_sequences);
 foreach my $seq (@{$sequences})
 {
-  print {$fh->{words}} ($seq->words->[0], qq{\n});
+  print {$fh->{words}} (join(qq{ }, @{$seq->words}), qq{\n});
   print {$fh->{sequences}} ($seq->sequence, qq{\n});
 }
 
@@ -289,15 +292,18 @@ STDIN
 
 =item B<--words> I<WordsFilename>
 
-Specify the filename to use for the "words" output file. Each line in the words
-file corresponds with the same line number in the sequences file.
+Specify the the name of the "words" output file.  Each line in the "words"
+file indicates the word (or words if --no-unique is specified) that contains
+the sequence on the same line number in the "sequences" file. 
 
 DEFAULT: --words "words"
 
 =item B<--sequences> I<SequencesFilename>
 
-Specify the filename to use for the "sequences" output file. Each line in the
-sequences file corresponds with the same line number in the words file.
+Specify the the name of the "sequences" output file.  Each line in the 
+"sequences" file contains a sequnce of the specified length and the word
+(or words if --no-unique is specified) that contains the sequence is on the
+same line number in the "words" file.
 
 DEFAULT: --sequences "sequences"
 
