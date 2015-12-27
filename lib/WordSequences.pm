@@ -14,7 +14,7 @@ arbitrary length sequences
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =head1 SYNOPSIS
 
@@ -28,7 +28,7 @@ Version 0.01
   ## Print all uniques sequences and their associated word
   foreach my $sequence ($sequences->unique_sequences)
   {
-  	printf(qq{%s %s\n}, $sequence->sequence, $sequence->words);
+    printf(qq{%s %s\n}, $sequence->sequence, join(qq{ }, $sequence->words));
   }
 
 =cut
@@ -45,7 +45,7 @@ use WordSequence;
 use Scalar::Util qw(openhandle);
 
 ## Version string
-our $VERSION = qq{0.01};
+our $VERSION = qq{0.02};
 
 ##****************************************************************************
 ## Object attribute
