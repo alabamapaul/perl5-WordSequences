@@ -54,5 +54,11 @@ The --sequences option specifies the name of the "sequences" output file.  Each 
 The "sequence" file is ouput in ascending order.  
 **DEFAULT:** --sequences "sequences"
 
+#### --help
+The --help option prints the command usage then exits.
+
 #### --version
 The --version option prints the name of the script and the script version, then exits.
+
+#### --man
+The --man option prints the command usage and additional information then exits.
