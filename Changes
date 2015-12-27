@@ -1,4 +1,6 @@
 {{$NEXT}}
+
+0.03    2015-12-27
         * In WordSequences module, corrected bug that allowed sequences that
           contained non-letters (numbers, punctuation marks etc.) to be added.
           
