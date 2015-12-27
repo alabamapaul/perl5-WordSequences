@@ -8,10 +8,12 @@ use Readonly;
 
 ## Symbolic constants for various tests
 Readonly::Scalar my $TEST_SEQ_LENGTH      => 4;
-Readonly::Scalar my $TEST_DATA_WORD_COUNT => 4;
+Readonly::Scalar my $TEST_DATA_WORD_COUNT => 7;
 Readonly::Scalar my $UNIQUE_SEQUENCES     => {
   carr => qq{carrots},
+  cloc => qq{o'clock},
   give => qq{give},
+  lock => qq{o'clock},
   rots => qq{carrots},
   rows => qq{arrows},
   rrot => qq{carrots},
@@ -42,3 +44,6 @@ arrows
 carrots
 give
 me
+100th
+O'clock
+a.m.
